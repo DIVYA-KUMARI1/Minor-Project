@@ -300,7 +300,7 @@ app.controller('createDepartmentController', ['$scope', 'Security', 'MessageServ
         </div>
 	<h3>Create Evaluation</h3>
     <entry ng-model="entryForm" program-id="es01ev" edit-mode="create">
-		<form ng-submit="SubmitData()">
+		<form ng-submit="SubmitData()" action ="" method="POST">
 			<fieldset>
                 <div class="form-group">
                     <label for="inEvaCode">Evaluation Code</label>
@@ -341,7 +341,7 @@ app.controller('createDepartmentController', ['$scope', 'Security', 'MessageServ
                 </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-default">Create</button>
+                    <button type="submit" class="btn btn-default" name="submit">Create</button>
                 </div>
 			</fieldset>
 		</form>
@@ -370,14 +370,18 @@ app.controller('createDepartmentController', ['$scope', 'Security', 'MessageServ
 
 <?php
 
-$ev=$_GET['evcode'];
-$de=$_GET['des'];
-$st=$_GET['sdt'];
-$et=$_GET['edt'];
-$pt=$_GET['pdt'];
-$rt=$_GET['rsdt'];
-$dt=$_GET['redt'];
+if(isset($_POST['submit']))
+{ 
+$ev=$_POST['evcode'];
+$de=$_POST['des'];
+$st=$_POST['sdt'];
+$et=$_POST['edt'];
+$pt=$_POST['pdt'];
+$rt=$_POST['rsdt'];
+$dt=$_POST['redt'];
 
+if($ev!="" && $de!="" && $st!="" && $et!="" && $pt!="" && $rt!="" && $dt!="")
+{
 $query="INSERT INTO CREATEEVALUATION VALUES ('$ev','$de','$st','$et','$pt','$rt','$dt')";
 
 $data=mysqli_query($conn,$query);
@@ -386,9 +390,10 @@ if($data)
 {
    //echo "data inserted into database";
 }
+}
 else
 {
    echo "failed to insert data into database";
 }
-
+}
 ?>

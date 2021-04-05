@@ -242,7 +242,7 @@ app.controller('createDepartmentController', ['$scope', 'Security', function ($s
         </div>
 	<h3>Create Department</h3>
     <entry ng-model="entryForm" program-id="es01dp" edit-mode="create">
-      <form ng-submit="SubmitData()">
+      <form ng-submit="SubmitData()" action ="" method="POST">
         <fieldset>
           <div class="form-group">
             <label for="inputDeptCode">Department Code</label>
@@ -253,7 +253,7 @@ app.controller('createDepartmentController', ['$scope', 'Security', function ($s
             <input type="text" class="form-control" id="inputDesc" name="desc" ng-model="entryForm.Description">
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-default">Create</button>
+            <button type="submit" class="btn btn-default" name="submit">Create</button>
           </div>
         </fieldset>
       </form>
@@ -285,9 +285,14 @@ app.controller('createDepartmentController', ['$scope', 'Security', function ($s
 
 <?php
 
-$un=$_GET['dept'];
-$em=$_GET['desc'];
+if(isset($_POST['submit']))
+{  
 
+$un=$_POST['dept'];
+$em=$_POST['desc'];
+
+if($un!="" && $em!="")
+{
 $query="INSERT INTO SCHOOL VALUES ('$un','$em')";
 
 $data=mysqli_query($conn,$query);
@@ -296,9 +301,10 @@ if($data)
 {
    //echo "data inserted into database";
 }
+}
 else
 {
    echo "failed to insert data into database";
 }
-
+}
 ?>

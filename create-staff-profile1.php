@@ -323,7 +323,7 @@ app.controller('createPositionController', ['$scope', 'Security', 'MessageServic
         </div>
 	<h3>Create Staff Profile</h3>
     <entry ng-model="entryForm" program-id="ee01sf" edit-mode="create">
-      <form ng-submit="SubmitData()">
+      <form ng-submit="SubmitData()" action="" method="POST">
         <fieldset>
           <div class="form-group">
             <label for="inputDeptCode">Staff ID</label>
@@ -454,7 +454,7 @@ app.controller('createPositionController', ['$scope', 'Security', 'MessageServic
 			  </div>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-default">Create</button>
+            <button type="submit" class="btn btn-default" name="submit">Create</button>
           </div>
         </fieldset>
       </form>
@@ -483,27 +483,32 @@ app.controller('createPositionController', ['$scope', 'Security', 'MessageServic
 
 <?php
 
-$sid=$_GET['staffid'];
-$fn=$_GET['firstname'];
-$ln=$_GET['lastname'];
-$dcode=$_GET['deptcode'];
-$ddes=$_GET['deptdescription'];
-$sg=$_GET['staffgradecode'];
-$sdes=$_GET['staffdescription'];
-$pcode=$_GET['poscode'];
-$pdes=$_GET['posdescription'];
-$supid=$_GET['supid'];
-$sfn=$_GET['supfirstname'];
-$sln=$_GET['suplastname'];
-$emdt=$_GET['empdt'];
-$prdt=$_GET['prodt'];
-$estat=$_GET['inputEmployStatus'];
-$gen=$_GET['inputGender'];
-$bir=$_GET['birthday'];
-$em=$_GET['email'];
-$tel=$_GET['telephone'];
-$mob=$_GET['mobile'];
+if(isset($_POST['submit']))
+{ 
 
+$sid=$_POST['staffid'];
+$fn=$_POST['firstname'];
+$ln=$_POST['lastname'];
+$dcode=$_POST['deptcode'];
+$ddes=$_POST['deptdescription'];
+$sg=$_POST['staffgradecode'];
+$sdes=$_POST['staffdescription'];
+$pcode=$_POST['poscode'];
+$pdes=$_POST['posdescription'];
+$supid=$_POST['supid'];
+$sfn=$_POST['supfirstname'];
+$sln=$_POST['suplastname'];
+$emdt=$_POST['empdt'];
+$prdt=$_POST['prodt'];
+$estat=$_POST['inputEmployStatus'];
+$gen=$_POST['inputGender'];
+$bir=$_POST['birthday'];
+$em=$_POST['email'];
+$tel=$_POST['telephone'];
+$mob=$_POST['mobile'];
+
+if($sid!="" && $fn!="" && $ln!="" && $dcode!="" && $ddes!="" && $sg!="" && $sdes!="" && $pcode!="" && $pdes!="" && $supid!="" && $sfn!="" && $sln!="" && $emdt!="" && $prdt!="" && $estat!="" && $gen!="" && $bir!="" && $em!="" && $tel!="" &&$mob!="")
+{
 $query="INSERT INTO STAFFPROFILE VALUES ('$sid','$fn','$ln','$dcode','$ddes','$sg','$sdes','$pcode','$pdes','$supid','$sfn','$sln','$emdt','$prdt','$estat','$gen','$bir','$em','$tel','$mob')";
 
 $data=mysqli_query($conn,$query);
@@ -512,9 +517,10 @@ if($data)
 {
    //echo "data inserted into database";
 }
+}
 else
 {
    echo "failed to insert data into database";
 }
-
+}
 ?>

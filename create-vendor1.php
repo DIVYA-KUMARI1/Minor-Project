@@ -238,7 +238,7 @@ app.controller('createVendorController', ['$scope', 'Security', function ($scope
         </div>
 	<h3>Create Vendor</h3>
     <entry ng-model="entryForm" program-id="es01vd" edit-mode="create">
-      <form ng-submit="SubmitData()">
+      <form ng-submit="SubmitData()" action ="" method="POST">
         <fieldset>
         <div class="form-group">
             <label>Vendor ID
@@ -272,7 +272,7 @@ app.controller('createVendorController', ['$scope', 'Security', function ($scope
             </label>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-default">Create</button>
+            <button type="submit" class="btn btn-default" name="submit">Create</button>
           </div>
         </fieldset>
       </form>
@@ -300,12 +300,18 @@ app.controller('createVendorController', ['$scope', 'Security', function ($scope
 <!-- InstanceEnd --></html>
 
 <?php
-$sid=$_GET['vendorid'];
-$fn=$_GET['orgname'];
-$ln=$_GET['contactperson'];
-$dcode=$_GET['phone'];
-$ddes=$_GET['email'];
 
+if(isset($_POST['submit']))
+{  
+
+$sid=$_POST['vendorid'];
+$fn=$_POST['orgname'];
+$ln=$_POST['contactperson'];
+$dcode=$_POST['phone'];
+$ddes=$_POST['email'];
+
+if($sid!="" && $fn!="" && $ln!="" && $dcode!="" && $ddes!="")
+{
 $query="INSERT INTO VENDOR VALUES ('$sid','$fn','$ln','$dcode','$ddes')";
 
 $data=mysqli_query($conn,$query);
@@ -314,11 +320,12 @@ if($data)
 {
    //echo "data inserted into database";
 }
+}
 else
 {
    echo "failed to insert data into database";
 }
-
+}
 ?>
 
 

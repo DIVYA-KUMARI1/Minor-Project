@@ -223,7 +223,7 @@ app.controller('createPositionController', ['$scope', 'Security', function ($sco
         </div>
 	<h3>Create Position</h3>
     <entry ng-model="entryForm" program-id="es01ps" edit-mode="create">
-      <form ng-submit="SubmitData()">
+      <form ng-submit="SubmitData()" action="" method="POST">
         <fieldset>
           <div class="form-group">
             <label for="inputDeptCode">Position Code</label>
@@ -234,7 +234,7 @@ app.controller('createPositionController', ['$scope', 'Security', function ($sco
             <input type="text" class="form-control" id="inputDesc" name="description" ng-model="entryForm.Description">
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-default">Create</button>
+            <button type="submit" class="btn btn-default" name="submit">Create</button>
           </div>
         </fieldset>
       </form>
@@ -263,8 +263,14 @@ app.controller('createPositionController', ['$scope', 'Security', function ($sco
 
 <?php
 
-$un=$_GET['positioncode'];
-$em=$_GET['description'];
+if(isset($_POST['submit']))
+{ 
+
+$un=$_POST['positioncode'];
+$em=$_POST['description'];
+
+if($un!="" && $em!="")
+{
 
 $query="INSERT INTO CREATEPOSITION VALUES ('$un','$em')";
 
@@ -274,9 +280,10 @@ if($data)
 {
    //echo "data inserted into database";
 }
+}
 else
 {
    echo "failed to insert data into database";
 }
-
+}
 ?>

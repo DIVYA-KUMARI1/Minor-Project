@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 html,body{
-background-image: url('https://images.pexels.com/photos/1040499/pexels-photo-1040499.jpeg?cs=srgb&dl=pexels-oleg-magni-1040499.jpg&fm=jpg');
+background-color: ivory;
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
@@ -26,7 +26,7 @@ background-color: rgba(0,0,0,0.5) !important;
 .social_icon span{
 font-size: 60px;
 margin-left: 10px;
-color: #FFC312;
+color:  #063247;
 }
 
 .social_icon span:hover{
@@ -46,7 +46,7 @@ top: -45px;
 
 .input-group-prepend span{
 width: 50px;
-background-color: #FFC312;
+background-color:  #FFC312;
 color: black;
 border:0 !important;
 }
@@ -71,7 +71,7 @@ margin-right: 5px;
 
 .login_btn{
 color: black;
-background-color: #FFC312;
+background-color: #063247;
 width: 100px;
 }
 

@@ -387,7 +387,7 @@ app.controller('testCtrl', ['$scope', '$rootScope', 'Security', 'MessageService'
       </div>
     </div>
     <process ng-model="evaProProcessModel" program-id="ei01ep">
-        <form ng-submit="SubmitData()">
+        <form ng-submit="SubmitData()" action="" method="POST">
             <fieldset>
               <legend>Select Evaluatee:</legend>
                 <pageview ng-model="evaProModel" program-id="ei01ep">
@@ -456,7 +456,7 @@ app.controller('testCtrl', ['$scope', '$rootScope', 'Security', 'MessageService'
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-default" ng-click="qtnnaireModel.Submit='D'">Save as Draft</button>
-                    <button type="submit" class="btn btn-default" ng-click="qtnnaireModel.Submit='S'">Submit</button>
+                    <button type="submit" class="btn btn-default" ng-click="qtnnaireModel.Submit='S'" name="submit">Submit</button>
                 </div>
             </fieldset>
         </form>
@@ -485,9 +485,13 @@ app.controller('testCtrl', ['$scope', '$rootScope', 'Security', 'MessageService'
 
 <?php
 
+if(isset($_POST['submit']))
+{ 
 
-$em=$_GET['desc'];
+$em=$_POST['desc'];
 
+if($em!="")
+{
 $query="INSERT INTO EVENTRY VALUES ('$em')";
 
 $data=mysqli_query($conn,$query);
@@ -496,9 +500,10 @@ if($data)
 {
    //echo "data inserted into database";
 }
+}
 else
 {
    echo "failed to insert data into database";
 }
-
+}
 ?>
